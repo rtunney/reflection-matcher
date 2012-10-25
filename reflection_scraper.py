@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 import os
 import re
 
+#create_frequency_dict can't handle keywords with characters like
+#+, *, or ? that have special meanings in regex
+
 def get_keywords(filename):
   keywords = []
   f = open(filename, 'r')
@@ -12,18 +15,25 @@ def get_keywords(filename):
 def create_frequency_dict(keywords, reflection_str):
   frequency_dict = {}
   for keyword in keywords:
-    keyword = re.compile('(?:\A|\W)' + keyword + '(?:\W|\Z)', re.IGNORECASE)
-    count = len(keyword.findall(reflection_str))
+    re_keyword = re.compile('(?:\A|\W)' + keyword + '(?:\W|\Z)', re.IGNORECASE)
+    count = len(re_keyword.findall(reflection_str))
     if count > 0:
       frequency_dict[keyword] = count
   return frequency_dict
 
-def create_master_dict(keywords, reflections_dict):
-  master_dict = {}
+def create_db_entry (keywords, name, reflection_str):
+  db_entry = {}
+  db_entry['name'] = name
+  frequency_dict = create_frequency_dict(keywords, reflection_str)
+  db_entry['keywords'] = frequency_dict
+  return db_entry
+
+def create_master_list(keywords, reflections_dict):
+  master_list = []
   for name, reflection_str in reflections_dict.iteritems():
-    frequency_dict = create_frequency_dict(keywords, reflection_str)
-    master_dict[name] = frequency_dict
-  return master_dict
+    db_entry = create_db_entry(keywords, name, reflection_str)
+    master_list.append(db_entry)
+  return master_list
 
 def get_file_names(dir_path):
   files = os.listdir(dir_path)
@@ -52,6 +62,6 @@ keywords = get_keywords(KEYWORDS_FILENAME)
 file_names = get_file_names('html/')
 reflections = get_reflections(file_names)
 reflections_dict = scrape_reflections(reflections)
-master_dict = create_master_dict(keywords, reflections_dict)
+master_list = create_master_list(keywords, reflections_dict)
 
-print master_dict
+print master_list

@@ -24,7 +24,6 @@ algorithm
 harlick
 nltk
 c
-c++
 sicp
 cerlicue
 todo
