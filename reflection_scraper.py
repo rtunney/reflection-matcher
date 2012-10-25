@@ -63,5 +63,3 @@ file_names = get_file_names('html/')
 reflections = get_reflections(file_names)
 reflections_dict = scrape_reflections(reflections)
 master_list = create_master_list(keywords, reflections_dict)
-
-print master_list
