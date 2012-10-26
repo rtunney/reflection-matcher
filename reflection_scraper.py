@@ -15,7 +15,7 @@ def get_keywords(filename):
 def create_frequency_dict(keywords, reflection_str):
   frequency_dict = {}
   for keyword in keywords:
-    re_keyword = re.compile('(?:\A|\W)' + keyword + '(?:\W|\Z)', re.IGNORECASE)
+    re_keyword = re.compile('(?:\A|\W)' + re.escape(keyword) + '(?:\W|\Z)', re.IGNORECASE)
     count = len(re_keyword.findall(reflection_str))
     if count > 0:
       frequency_dict[keyword] = count

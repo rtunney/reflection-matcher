@@ -1,14 +1,16 @@
-import pymongo
 from pymongo import Connection
 from reflection_scraper import master_list
 
-#$ mongod
 connection = Connection()
 
-db = connection.keywords_db
-keywords_col = db.keywords_col
-keywords_col.insert(master_list)
+db = connection.reflections
+collection = db.words
+collection.insert(master_list)
 
+#for doc in db.words.find({"keywords.json" : {$exists : true}}):
+#	print doc
+
+#print collection.find_one({'keywords':})
 #for doc in keywords_col.find():
 #	print doc
 
