@@ -32,9 +32,13 @@ if __name__ == '__main__':
     password = os.environ.get('REFLECTION_SECRET')
     s = get_session(email, password) 
     #Fix this later so that you don't have to update the page range
-    for pageIndex in range(1, 7):
+    if not os.path.exists ("html"):
+        os.mkdir ("html")
+    r = s.get(host+'/reflections?page=0', verify=False)
+    last_page = int(re.search(r'class="last">\s+<a href="/reflections[?]page=(\d+)">', r.text).group(1))
+
+    for pageIndex in range(1, last_page + 1):
       r = s.get(host+'/reflections?page={0}'.format (pageIndex), verify=False)
       f = open("html/reflections_page_{0}.html".format(pageIndex), "w")
       f.write(r.text)
       f.close()
-
