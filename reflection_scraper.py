@@ -57,9 +57,10 @@ def scrape_reflections(reflections):
   return reflections_dict
 
 KEYWORDS_FILENAME = "keywords.txt"
-
-keywords = get_keywords(KEYWORDS_FILENAME)
-file_names = get_file_names('html/')
-reflections = get_reflections(file_names)
-reflections_dict = scrape_reflections(reflections)
-master_list = create_master_list(keywords, reflections_dict)
+def get_peoples_words():
+  keywords = get_keywords(KEYWORDS_FILENAME)
+  file_names = get_file_names('html/')
+  reflections = get_reflections(file_names)
+  reflections_dict = scrape_reflections(reflections)
+  master_list = create_master_list(keywords, reflections_dict)
+  return master_list

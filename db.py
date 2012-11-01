@@ -1,11 +1,12 @@
 from pymongo import Connection
-from reflection_scraper import master_list
 
 connection = Connection()
 
-db = connection.reflections
-collection = db.words
-collection.insert(master_list)
+def save_words_in_reflections(word_list):
+	db = connection.reflections
+	collection = db.words
+	collection.remove({})
+	collection.insert(word_list)
 
 #for doc in db.words.find({"keywords.json" : {$exists : true}}):
 #	print doc

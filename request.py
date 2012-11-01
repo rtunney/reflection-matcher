@@ -26,12 +26,13 @@ def get_session(email, password, host='https://www.hackerschool.com'):
     r = s.post(host+'/sessions', data=payload, verify=False)
     return s
 
-if __name__ == '__main__':
+def download_reflections_pages():
+    '''downloads all reflection pages and stores them in a folder called html'''
     host = 'https://hackerschool.com'
     email = os.environ.get('REFLECTION_ID')
     password = os.environ.get('REFLECTION_SECRET')
     s = get_session(email, password) 
-    #Fix this later so that you don't have to update the page range
+
     if not os.path.exists ("html"):
         os.mkdir ("html")
     r = s.get(host+'/reflections?page=0', verify=False)
@@ -42,3 +43,5 @@ if __name__ == '__main__':
       f = open("html/reflections_page_{0}.html".format(pageIndex), "w")
       f.write(r.text)
       f.close()
+if __name__ == '__main__':
+    download_reflections_pages()
