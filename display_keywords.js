@@ -28,8 +28,8 @@ function get_people(keyword){
 };
 
 function display_keywords(){
-  var my_name = document.getElementById('name').value;
-  var keywords = get_keywords(my_name)
+  var my_name = document.getElementById('name');
+  var keywords = get_keywords(my_name.value)
   kwlist = document.getElementById('kwlist');
   for (el in keywords){
     console.log(el);
