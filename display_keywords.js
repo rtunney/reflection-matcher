@@ -28,17 +28,27 @@ function get_people(keyword){
 };
 
 function display_keywords(){
-  var my_name = document.getElementById('name');
-  var keywords = get_keywords(my_name.value)
-  kwlist = document.getElementById('kwlist');
-  for (el in keywords){
-    console.log(el);
-    var listelement = document.createElement('li')
-    listelement.innerHTML = el;
-    kwlist.appendChild(listelement);
+  var name_input = document.getElementById('name');
+  var keywords = get_keywords(name_input.value)
+  kw_list = document.getElementById('kw_list');
+  for (keyword in keywords){
+    var keyword_li = document.createElement('li');
+    keyword_li.innerHTML = keyword;
+    display_people(keyword_li, keyword);
+    kw_list.appendChild(keyword_li);
   }
 };
 
+function display_people(keyword_li, keyword){
+ var people_list = document.createElement('ul');
+    keyword_li.appendChild(people_list);
+    people = people_by_keywords[keyword];
+    for (var i=0; i<people.length; i++) {
+      var person_li = document.createElement('li');
+      person_li.innerHTML = people[i];
+      people_list.appendChild(person_li);
+    }
+}
 
 
 button = document.getElementById('button');
