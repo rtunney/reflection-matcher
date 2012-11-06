@@ -23,14 +23,13 @@ def get_JSON():
 	words_to_match_names = {}
 
 	name = request.form['fname']
-	print "post request is still happening"
 	doc = collection.find_one({'name':name})
 	my_keywords = doc['keywords'].keys()
 	match_data.append(my_keywords)
 
 	for keyword in my_keywords:
 		match_names = []
-		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}})
+		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}}).sort('keywords.'+keyword, -1)
 		#.sort({keywords.keyword, DESCENDING)
 		for match_doc in match_docs:
 			if match_doc['name'] != name:
