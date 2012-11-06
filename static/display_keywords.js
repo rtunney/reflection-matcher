@@ -1,31 +1,33 @@
 //func that looks up your name
 // attach the action to the button
 
-var keywords_by_name = {};
-for (i=0; i < master_list.length; i++){
-  keywords_by_name[master_list[i].name] = master_list[i].keywords
-};
+// var keywords_by_name = {};
+// for (i=0; i < master_list.length; i++){
+//   keywords_by_name[master_list[i].name] = master_list[i].keywords
+// };
 
-var people_by_keywords = {};
-for (i=0; i < master_list.length; i++){
-  for (el in master_list[i].keywords){
-    var name = master_list[i].name;
-    if (people_by_keywords[el] == undefined){
-      people_by_keywords[el] = [name];
-    }else{
-      people_by_keywords[el].push(name);
-    }
-  }
-};
-console.log(people_by_keywords);
+// var people_by_keywords = {};
+// for (i=0; i < master_list.length; i++){
+//   for (el in master_list[i].keywords){
+//     var name = master_list[i].name;
+//     if (people_by_keywords[el] == undefined){
+//       people_by_keywords[el] = [name];
+//     }else{
+//       people_by_keywords[el].push(name);
+//     }
+//   }
+// };
+// console.log(people_by_keywords);
 
-function get_keywords(name){
-  return keywords_by_name[name]
-};
+// function get_keywords(name){
+//   return keywords_by_name[name]
+// };
 
-function get_people(keyword){
-  return people_by_keywords[keyword]
-};
+// function get_people(keyword){
+//   return people_by_keywords[keyword]
+// };
+
+var user_name = document.getElementById('name').value
 
 function display_keywords(){
   var name_input = document.getElementById('name');
@@ -50,6 +52,15 @@ function display_people(keyword_li, keyword){
     }
 }
 
+// function on_response (data, textStatus){
+  
+// }
+
+function display_matches() {
+  $.post('http://localhost:5000/', {fname: user_name}, function(data, textStatus){
+    console.log(textStatus);
+  });
+}
 
 button = document.getElementById('button');
-button.addEventListener('click', display_keywords);
+button.addEventListener('click', display_matches);
