@@ -11,6 +11,10 @@ collection = db.words
 def start():
 	return render_template('index.html')
 
+@app.route('/favicon.ico')
+def get_icon():
+	return
+
 @app.route('/<name>', methods=["GET"])
 	#create match_data to return as json object for display
 
@@ -19,7 +23,7 @@ def start():
 
 	#child nodes are written as dictionaries identical to the one
 	#described above.
-	
+
 def get_JSON(name):
 
 	print "got request for " + name
@@ -30,6 +34,7 @@ def get_JSON(name):
 	match_data['children'] = []
 
 	doc = collection.find_one({'name':name})
+	print "name: " + name
 	my_keywords = doc['keywords'].keys()
 
 	for keyword in my_keywords:

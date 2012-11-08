@@ -52,13 +52,9 @@ var generate_tree = function(){
 	});
 };
 
-// $('#name').keypress(generate_tree());
 
-
-// name_input = document.getElementById('name');
-// name_input.addEventListener('keypress', function(e){
-//   if (e.keyCode == 13) {
-//     console.log('Enter pressed')
-//     generate_tree();
-//   }
-// });
+$('#form').submit(function(){
+	console.log("form submit entered")
+	generate_tree();
+	return false;
+});
