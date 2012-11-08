@@ -1,10 +1,15 @@
+p {
+	font-family: 'Arbutus Slab', serif;
+	font-size: 14px;
+	font-weight: normal;
+}
+
 h1 {
-	font-family: Helvetica-Neue, Helvetica, sans-serif;
-	font-weight: lighter;
-	letter-spacing: 1px;
+	font-family: 'Arbutus Slab', serif;
+	font-size: 48px;
 	text-align: center;
 	color: #574D37;
-
+	letter-spacing: -1px;
 }
 
 form {
@@ -12,6 +17,13 @@ form {
 }
 
 label {
+	font-family: 'Arbutus Slab', serif;
+	font-size: 18px;
+	color: #F93;
+}
+
+circle {
+	fill: #9C3;
 }
 
 #name {
@@ -22,6 +34,26 @@ label {
 	color: #574D37;
 }
 
+#submit {
+	background-color: #F93;
+	padding: 5px;
+	color: white;
+	font-size: 14px;
+}
+
 .gallery {
 	text-align: center;
+	margin-top: 10px;
+}
+
+.link {
+      stroke: #ddd;
+      fill: none;
+}
+
+.text {
+	font-family: Helvetica-Neue, Helvetica, sans-serif;
+	font-size: 14px;
+	letter-spacing: 1px;
+	color: #574D37;
 }

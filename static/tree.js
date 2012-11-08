@@ -17,9 +17,9 @@ var generate_tree = function(){
 
 	var vis = d3.select("#chart").append("svg")
 	    .attr("width", radius * 2 + 150)
-	    .attr("height", radius * 2 + 150)
+	    .attr("height", radius * 2 + 200)
 	  .append("g")
-	    .attr("transform", "translate(" + (radius + 50) + "," + (radius + 50) + ")");
+	    .attr("transform", "translate(" + (radius + 50) + "," + (radius + 100) + ")");
 	
 	//grab input name
 	var name = document.getElementById('name').value
@@ -31,9 +31,7 @@ var generate_tree = function(){
 	      .data(tree.links(nodes))
 	    .enter().append("path")
 	      .attr("class", "link")
-	      .attr("d", diagonal)
-	      .attr("stroke", "#eee")
-	      .attr("fill", "none");
+	      .attr("d", diagonal);
 	
 	  var node = vis.selectAll("g.node")
 	      .data(nodes)
@@ -46,6 +44,7 @@ var generate_tree = function(){
 	
 	  node.append("text")
 	      .attr("dy", ".31em")
+	      .attr("class", "text")
 	      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
 	      .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
 	      .text(function(d) { return d.name; });
