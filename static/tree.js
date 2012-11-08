@@ -16,10 +16,10 @@ var generate_tree = function(){
 	document.getElementById("chart").innerHTML = "";
 
 	var vis = d3.select("#chart").append("svg")
-	    .attr("width", radius * 2 + 100)
-	    .attr("height", radius * 2 + 100)
+	    .attr("width", radius * 2 + 150)
+	    .attr("height", radius * 2 + 150)
 	  .append("g")
-	    .attr("transform", "translate(" + (radius + 50) + "," + radius + ")");
+	    .attr("transform", "translate(" + (radius + 50) + "," + (radius + 50) + ")");
 	
 	//grab input name
 	var name = document.getElementById('name').value
@@ -53,8 +53,10 @@ var generate_tree = function(){
 };
 
 
-$('#form').submit(function(){
-	console.log("form submit entered")
-	generate_tree();
-	return false;
+$(document).ready(function(){
+	$('#form').submit(function(){
+		console.log("form submit entered");
+		generate_tree();
+		return false;
+	});
 });

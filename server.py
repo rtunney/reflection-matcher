@@ -51,7 +51,8 @@ def get_JSON(name):
 
 		for person in match_names:
 			person_data = {}
-			person_data['name'] = person
+			num_kw_matches = collection.find_one({'name':person})['keywords'][keyword]
+			person_data['name'] = person + " (" + str(num_kw_matches) + ")"
 			word_data['children'].append(person_data)
 
 		match_data['children'].append(word_data)

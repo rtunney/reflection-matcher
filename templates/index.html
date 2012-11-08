@@ -3,14 +3,16 @@
 	<head>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script src="http://d3js.org/d3.v2.js"></script>
+		<script src="../static/tree.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/style.css" />
 	</head>
 	<body>
 		<h1>Make me a match!</h1>
 		<form id="form">
-			Full Name: <input id="name" type="text" name="fname" value="Robert Tunney"><br>
-			<input type="submit" id="submit" value="Submit"><br>
+			<label for="name">Full Name: </label>
+			<input id="name" type="text" name="fname" >
+			<input type="submit" id="submit" value="GO"></br>
 		</form>
-		<script src="../static/tree.js"></script>
 		<div class="gallery" id='chart'></div>
 	</body>	
 </html> 
