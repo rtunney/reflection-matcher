@@ -11,22 +11,19 @@ collection = db.words
 def start():
 	return render_template('index.html')
 
-@app.route('/', methods = ['POST'])
+@app.route('/<name>', methods=["GET"])
 	#create match_data to return as json object for display
 	#match data contains [0] a list of your keywords and 
 	#[1] a dict mapping your keywords to lists of people who share those words
-def get_JSON():
+def get_JSON(name):
 
 	#print request
-
-	match_data = []
-	words_to_match_names = {}
-
-	name = request.form['fname']
+	print "got request for " + name
+	#name = request.form['fname']
 	doc = collection.find_one({'name':name})
 	my_keywords = doc['keywords'].keys()
-	match_data.append(my_keywords)
 
+	words_to_match_names = {}
 	for keyword in my_keywords:
 		match_names = []
 		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}}).sort('keywords.'+keyword, -1)
@@ -36,9 +33,24 @@ def get_JSON():
 				match_names.append(match_doc['name'])
 
 		words_to_match_names[keyword] = match_names
+	#-------------------------------------------
+	#   OLD STUFF ABOVE, NEW STUFF BELOW. MERGE
+	#-------------------------------------------
+	match_data = {}
 
-	match_data.append(words_to_match_names)
-	# #return expects the html of a page. We don't know how to send our information to be manipulated by a js file
+	match_data['name'] = name
+	match_data['children'] = []
+
+	for keyword in my_keywords:
+		word_data = {}
+		word_data['name'] = keyword
+		word_data['children'] = []
+		for person in words_to_match_names[keyword]:
+			person_data = {}
+			person_data['name'] = person
+			word_data['children'].append(person_data)
+		match_data['children'].append(word_data)
+
 	return json.dumps(match_data)
 	
 if __name__ == '__main__':
