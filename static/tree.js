@@ -12,6 +12,9 @@ var generate_tree = function(){
 	var diagonal = d3.svg.diagonal.radial()
 	    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 	
+	//clear chart before re-drawing for new submits
+	document.getElementById("chart").innerHTML = "";
+
 	var vis = d3.select("#chart").append("svg")
 	    .attr("width", radius * 2 + 100)
 	    .attr("height", radius * 2 + 100)
