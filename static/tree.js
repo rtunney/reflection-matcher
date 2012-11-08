@@ -1,13 +1,5 @@
-
-// get_tree_json = function () {
-//   var user_name = document.getElementById('name').value
-//   var tree_json = $.post('http://localhost:5000/', {fname: user_name}, function(data, textStatus){
-//     var data = $.parseJSON(data);
-//     return data;
-//   });
-//   console.log(tree_json);
-//   return tree_json;
-// };
+//d3 template to generate a radial tree diagram
+//see original at http://mbostock.github.com/d3/ex/tree.html
 
 var generate_tree = function(){
 	console.log("entering generate tree")
@@ -21,11 +13,12 @@ var generate_tree = function(){
 	    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 	
 	var vis = d3.select("#chart").append("svg")
-	    .attr("width", radius * 2)
-	    .attr("height", radius * 2 - 150)
+	    .attr("width", radius * 2 + 100)
+	    .attr("height", radius * 2 + 100)
 	  .append("g")
-	    .attr("transform", "translate(" + radius + "," + radius + ")");
+	    .attr("transform", "translate(" + (radius + 50) + "," + radius + ")");
 	
+	//grab input name
 	var name = document.getElementById('name').value
 
 	d3.json('/' + name, function(json) {
@@ -35,13 +28,15 @@ var generate_tree = function(){
 	      .data(tree.links(nodes))
 	    .enter().append("path")
 	      .attr("class", "link")
-	      .attr("d", diagonal);
+	      .attr("d", diagonal)
+	      .attr("stroke", "#eee")
+	      .attr("fill", "none");
 	
 	  var node = vis.selectAll("g.node")
 	      .data(nodes)
 	    .enter().append("g")
 	      .attr("class", "node")
-	      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+	      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; });
 	
 	  node.append("circle")
 	      .attr("r", 4.5);
@@ -54,5 +49,13 @@ var generate_tree = function(){
 	});
 };
 
-button = document.getElementById('button');
-button.addEventListener('click', generate_tree);
+// $('#name').keypress(generate_tree());
+
+
+// name_input = document.getElementById('name');
+// name_input.addEventListener('keypress', function(e){
+//   if (e.keyCode == 13) {
+//     console.log('Enter pressed')
+//     generate_tree();
+//   }
+// });
