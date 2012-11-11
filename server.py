@@ -45,14 +45,21 @@ def get_JSON(name):
 		match_names = []
 		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}}).sort('keywords.'+keyword, -1)
 	
-		for match_doc in match_docs:
+		for match_doc in match_docs[:10]:
 			if match_doc['name'] != name:
 				match_names.append(match_doc['name'])
 
 		for person in match_names:
+			# INCLUDE TO CONCEAL LAST NAMES
+			# space1 = person.find(" ")
+			# space2 = person.find(" ", space1+1)
+
 			person_data = {}
 			num_kw_matches = collection.find_one({'name':person})['keywords'][keyword]
-			person_data['name'] = person + " (" + str(num_kw_matches) + ")"
+			person_data['name'] = (person
+			# INCLUDE TO CONCEAL LAST NAMES
+			# [:space1] 
+			+ " (" + str(num_kw_matches) + ")" )
 			word_data['children'].append(person_data)
 
 		match_data['children'].append(word_data)

@@ -58,4 +58,10 @@ $(document).ready(function(){
 		generate_tree();
 		return false;
 	});
+	$('#name').keypress(function(e){
+		if (e.keyCode===13) {
+			generate_tree();
+		}
+	});
+	$('#name').focus()
 });
