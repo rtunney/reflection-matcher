@@ -54,7 +54,6 @@ var generate_tree = function(){
 
 $(document).ready(function(){
 	$('#form').submit(function(){
-		console.log("form submit entered");
 		generate_tree();
 		return false;
 	});
