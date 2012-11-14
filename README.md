@@ -36,6 +36,12 @@ mongo and packages a json object with name/keywords/match_names that is
 expected by the d3 tree template. Generate_tree renders the tree and sticks
 it in the page. 
 
+Misc.
+----------
+To run request.py or main.py, you need to set REFLECTION_ID to your
+HS login and REFLECTION_SECRET to your HS password in your environmental
+variables. 
+
 Ignore
 ----------
 Procfile & requirements.txt 
