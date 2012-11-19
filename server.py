@@ -12,6 +12,7 @@ collection = db.words
 def start():
 	return render_template('index.html')
 
+#How do we return an icon???
 @app.route('/favicon.ico')
 def get_icon():
 	return

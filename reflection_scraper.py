@@ -39,7 +39,7 @@ def scrape_reflections(reflections):
     name = reflection.a.string[:-1]
     for p in reflection('p'):
       reflections_dict[name] = reflections_dict.get(name, "") + str(p.string).lstrip().lower()
-  return reflections_dict
+  return reflections_dict 
 
 def create_frequency_dict(keywords, reflection_str):
   '''input: list of keywords, string to search for keywords
