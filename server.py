@@ -39,6 +39,8 @@ def get_JSON(name):
 	print "name: " + name
 	my_keywords = doc['keywords'].keys()
 
+	kw_matches_by_name = {}
+
 	for keyword in my_keywords:
 		word_data = {}
 		word_data['name'] = keyword
@@ -48,8 +50,10 @@ def get_JSON(name):
 		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}}).sort('keywords.'+keyword, -1)
 	
 		for match_doc in match_docs[:10]:
-			if match_doc['name'] != name:
-				match_names.append(match_doc['name'])
+			match_name = match_doc['name']
+			if match_name != name:
+				match_names.append(match_name)
+				kw_matches_by_name[match_name] = kw_matches_by_name.get(match_name, 0) + 1
 
 		for person in match_names:
 			# INCLUDE TO CONCEAL LAST NAMES
@@ -65,6 +69,8 @@ def get_JSON(name):
 			word_data['children'].append(person_data)
 
 		match_data['children'].append(word_data)
+
+	match_data['top'] = max(kw_matches_by_name, key=kw_matches_by_name.get)
 
 	return json.dumps(match_data)
 	

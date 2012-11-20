@@ -16,10 +16,10 @@ var generate_tree = function(){
 	document.getElementById("chart").innerHTML = "";
 
 	var vis = d3.select("#chart").append("svg")
-	    .attr("width", radius * 2 + 150)
+	    .attr("width", radius * 2 + 400)
 	    .attr("height", radius * 2 + 200)
 	  .append("g")
-	    .attr("transform", "translate(" + (radius + 50) + "," + (radius + 100) + ")");
+	    .attr("transform", "translate(" + (radius + 200) + "," + (radius + 100) + ")");
 	
 	//grab input name
 	var name = document.getElementById('name').value
@@ -48,6 +48,9 @@ var generate_tree = function(){
 	      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
 	      .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
 	      .text(function(d) { return d.name; });
+
+	  var top_match = (nodes[0].top)
+	  $("#chart").append($("<h2></h2>").html("Top Match: " + top_match))
 	});
 };
 

@@ -12,6 +12,14 @@ h1 {
 	letter-spacing: -1px;
 }
 
+h2 {
+	font-family: 'Arbutus Slab', serif;
+	font-size: 24px;
+	text-align: center;
+ 	color: #574D37;
+ 	letter-spacing: -1px;
+}
+
 form {
 	text-align: center;
 }
@@ -19,7 +27,7 @@ form {
 label {
 	font-family: 'Arbutus Slab', serif;
 	font-size: 18px;
-	color: #F93;
+	color: #F82CBF;
 }
 
 circle {
@@ -35,10 +43,11 @@ circle {
 }
 
 #submit {
-	background-color: #F93;
+	background-color: #F82CBF;
 	padding: 5px;
 	color: white;
 	font-size: 14px;
+	border: none;
 }
 
 .gallery {
