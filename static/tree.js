@@ -50,10 +50,9 @@ var generate_tree = function(){
 	      .text(function(d) { return d.name; });
 
 	  var top_match = (nodes[0].top)
-	  $("#chart").append($("<h2></h2>").html("Top Match: " + top_match))
+	  $("#top").html("Top Match: " + top_match)
 	});
 };
-
 
 $(document).ready(function(){
 	$('#form').submit(function(){

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from pymongo import Connection
 import json
 import os
@@ -15,7 +15,7 @@ def start():
 #How do we return an icon???
 @app.route('/favicon.ico')
 def get_icon():
-	return
+	return send_from_directory(os.path.join(app.root_path, 'static'), 'pw.ico')
 
 @app.route('/<name>', methods=["GET"])
 	#create match_data to return as json object for display
