@@ -41,7 +41,7 @@ def download_reflections_pages():
     for pageIndex in range(1, last_page + 1):
       r = s.get(host+'/reflections?page={0}'.format (pageIndex), verify=False)
       f = open("html/reflections_page_{0}.html".format(pageIndex), "w")
-      f.write(r.text)
+      f.write(r.text.encode('utf8'))
       f.close()
 if __name__ == '__main__':
     download_reflections_pages()

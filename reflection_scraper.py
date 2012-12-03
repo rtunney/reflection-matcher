@@ -38,7 +38,8 @@ def scrape_reflections(reflections):
   for reflection in reflections:
     name = reflection.a.string[:-1]
     for p in reflection('p'):
-      reflections_dict[name] = reflections_dict.get(name, "") + str(p.string).lstrip().lower()
+      if p.string is not None:
+        reflections_dict[name] = reflections_dict.get(name, "") + str(p.string.encode('utf8')).lstrip().lower()
   return reflections_dict 
 
 def create_frequency_dict(keywords, reflection_str):

@@ -48,7 +48,9 @@ def get_JSON(name):
 
 		match_names = []
 		match_docs = collection.find({'keywords.'+keyword:{'$exists':True}}).sort('keywords.'+keyword, -1)
-	
+		
+		#INCLUDE TO LIMIT MATCHES BY WORD
+		#for match_doc in match_docs[:10]:
 		for match_doc in match_docs[:10]:
 			match_name = match_doc['name']
 			if match_name != name:
