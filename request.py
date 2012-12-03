@@ -35,7 +35,7 @@ def download_reflections_pages():
 
     if not os.path.exists ("html"):
         os.mkdir ("html")
-    r = s.get(host+'/reflections?page=0', verify=False)
+    r = s.get(host+'/reflections?page=0', verify=False) 
     last_page = int(re.search(r'class="last">\s+<a href="/reflections[?]page=(\d+)">', r.text).group(1))
 
     for pageIndex in range(1, last_page + 1):
